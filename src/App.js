@@ -7,10 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './components/Header';
 export class App extends Component {
+  
   state = {
     saleslead:[]
-  
-    
   }
   componentDidMount(){
     axios.get('http://localhost:8080/saleslead/api/get_leads.php').then(res=>
@@ -21,25 +20,25 @@ export class App extends Component {
       console.log(e)
     })
   }
+  
   //post
-  postLead(name,phone,state,city,zip,contact_method){
-   
-   axios.post('http://localhost:8080/saleslead/api/add_lead.php',{
-    name,phone,state,city,zip,contact_method}
-  
-  ).then(res=>{
+  postLead = (name,phone,state,city,zip,contact_method)=>{
+    axios.post('http://localhost:8080/saleslead/api/add_lead.php',{
+      name:name,
+      phone:phone,
+      state:state,
+      city:city,
+      zip:zip,
+      contact_method,contact_method
+    }).then(res=>
+      this.setState(
+        {saleslead:[...this.state.saleslead,res.data]}
+      )
     
+    )
    
-    this.setState({
-      
-      saleslead:this.state.saleslead!==undefined? [...this.state.saleslead,res.data] :[res.data]
-    });
-   
-  }).catch(e=>{
-    console.log(e)
-  })
-  
   }
+   
   //delete lead
 deleteLead = (id)=>{
   axios.delete(`http://localhost:8080/saleslead/api/delete_lead.php/?id=${id}`).then(res=> this.setState({
@@ -54,23 +53,37 @@ deleteLead = (id)=>{
 }
 
   render() {
-     
+    let component;
+    if(this.state.saleslead.message === undefined) {
+      
+        component = <Leads leads = {this.state.saleslead} deleteLead = {this.deleteLead}/>
+    } 
+    else {
+        component = <div className="alert alert-warning" role="alert">
+        No leads exist! add leads
+      </div>
+        axios.get('http://localhost:8080/saleslead/api/get_leads.php').then(res=>
+    
+        this.setState({saleslead:res.data})
+        
+      )
+    }
     return (
       <Router>
       <Header/>
       <div className = "container">
 
-      
-      <Route exact path = "/" render = {props=>(
-        <React.Fragment>
-        <Leads leads = {this.state.saleslead} deleteLead = {this.deleteLead}/>
-        </React.Fragment>
-      )}/>
       <Route exact path = "/addlead" render = {props=>(
         <React.Fragment>
-        <AddLead postLead = {this.postLead}/>
+        <AddLead postLead = {this.postLead} />
         </React.Fragment>
       )}/>
+      <Route exact path = "/" refresh render = {props=>(
+        <React.Fragment>
+          {component}
+        </React.Fragment>
+      )}/>
+      
       </div>
      
       </Router>

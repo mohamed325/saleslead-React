@@ -10,7 +10,7 @@ export default function Header() {
                 
         <Link style = {linkStyle} to ="/">Display_Leads</Link>
         
-        <Link style = {linkStyle} to = "/addlead">Add_Leads</Link>
+        <Link style = {linkStyle} to = "/addlead">Add_Lead</Link>
         
         </h1>
         

@@ -20,14 +20,16 @@ export class AddLead extends Component {
         this.setState({
             
             [e.target.name]: e.target.value})
-            console.log(e.target.value);
+            
     }
         onSubmit = (e)=>{
+       
         e.preventDefault();
         const {name,phone,state,city,zip,contact_method} = this.state;
         this.props.postLead(name,phone,state,city,zip,contact_method);
         this.setState({
         name:'',
+        
         phone:'',
         city:'',
         state:'',
@@ -38,12 +40,14 @@ export class AddLead extends Component {
     });
     
 
-   
+    
     }
     render() {
         
         if(this.state.redirect){
             return <Redirect to="/" />
+            
+            
         }
         
         return (
