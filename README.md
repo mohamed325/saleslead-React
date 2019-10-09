@@ -14,7 +14,6 @@ Clone repo and go into the project directory.
 ### Prerequisites
 You will need to Install Node.js
 
-https://dotnet.microsoft.com/download/dotnet-core/2.2
 
 
 ## Running the app
