@@ -32,6 +32,10 @@ They are two buttons on the top nav bar: Display Leads and Add new lead. Clickin
 
 the application will consume data from the api end http://0.0.0.0:8080//saleslead/api/get_leads.php and sendng data to endpoint  http://0.0.0.0:8080//saleslead/api/add_lead.php 
 
+## Deployed
+I deployed the frontend on netlify if you want to have quick user interaction with the app and not deal with local installations.
+you can access it at https://abdikarim.netlify.com
+
 ## Author
 
 * **Abdikarim Mohamed**
